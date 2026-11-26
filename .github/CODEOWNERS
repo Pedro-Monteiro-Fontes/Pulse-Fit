@@ -1,0 +1,27 @@
+# CODEOWNERS for Pulse Fit
+# This file defines who reviews changes to specific paths
+
+# Global owners (all files)
+* @Pedro-Monteiro-Fontes
+
+# Documentation
+/docs/ @Pedro-Monteiro-Fontes
+*.md @Pedro-Monteiro-Fontes
+
+# Configuration files
+package.json @Pedro-Monteiro-Fontes
+docker-compose.yml @Pedro-Monteiro-Fontes
+*.config.* @Pedro-Monteiro-Fontes
+*.rc @Pedro-Monteiro-Fontes
+
+# Shared package (Zod schemas)
+/shared/ @Pedro-Monteiro-Fontes
+
+# API package
+/api/ @Pedro-Monteiro-Fontes
+
+# Frontend package
+/frontend/ @Pedro-Monteiro-Fontes
+
+# GitHub workflows
+/.github/workflows/ @Pedro-Monteiro-Fontes

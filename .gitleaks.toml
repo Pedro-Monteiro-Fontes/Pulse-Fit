@@ -1,0 +1,49 @@
+title = "Pulse Fit GitLeaks Config"
+
+[allowlist]
+description = "Allowlisted patterns for Pulse Fit"
+paths = [
+  "(?i)^.*\\.env\\.example$",
+  "(?i)^.*\\.md$",
+  "(?i)^.*\\.toml$",
+  "(?i)^.*README.*$",
+]
+regexes = [
+  # Allow placeholder JWT_SECRET in .env.example
+  "trocar_em_producao_por_segredo_forte_aleatorio",
+  # Allow postgres default in docker-compose
+  "postgres:postgres@localhost",
+]
+commits = []
+
+[[rules]]
+id = "pulse-fit-jwt-secret"
+description = "Detect JWT secrets in code"
+regex = "(?i)(jwt[_-]?secret|jwt[_-]?key)\\s*[:=]\\s*[\"'][^\"']{20,}[\"']"
+tags = ["secret", "jwt"]
+entropy = 3.5
+
+[[rules]]
+id = "pulse-fit-database-url"
+description = "Detect database URLs with credentials"
+regex = "(?i)(database[_-]?url|db[_-]?url)\\s*[:=]\\s*[\"']?postgres(?:ql)?://[^\"'\\s]+:[^\"'\\s]+@"
+tags = ["secret", "database"]
+
+[[rules]]
+id = "pulse-fit-api-key"
+description = "Detect generic API keys"
+regex = "(?i)(api[_-]?key|apikey)\\s*[:=]\\s*[\"'][a-zA-Z0-9_-]{20,}[\"']"
+tags = ["secret", "api-key"]
+entropy = 4.0
+
+[[rules]]
+id = "pulse-fit-bcrypt-hash"
+description = "Detect bcrypt hashes (should not be in source)"
+regex = "\\$2[aby]\\$\\d{2}\\$[./A-Za-z0-9]{53}"
+tags = ["secret", "bcrypt"]
+
+[[rules]]
+id = "pulse-fit-aws-keys"
+description = "Detect AWS credentials"
+regex = "(?i)(aws[_-]?access[_-]?key[_-]?id|aws[_-]?secret[_-]?access[_-]?key)\\s*[:=]\\s*[\"']?[A-Z0-9]{16,}[\"']?"
+tags = ["secret", "aws"]

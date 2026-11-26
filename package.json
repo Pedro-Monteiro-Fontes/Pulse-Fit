@@ -2,6 +2,15 @@
   "name": "pulse-fit",
   "version": "1.0.0",
   "private": true,
+  "description": "Sistema de gestão para academia Pulse Fit — Monorepo com API (Express/Prisma) e Frontend (React/Vite/Tailwind)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pedro-Monteiro-Fontes/pulse-fit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pedro-Monteiro-Fontes/pulse-fit/issues"
+  },
+  "homepage": "https://github.com/Pedro-Monteiro-Fontes/pulse-fit#readme",
   "workspaces": [
     "shared",
     "api",
@@ -18,6 +27,8 @@
     "db:migrate": "npm run prisma:migrate -w api",
     "db:seed": "npm run prisma:seed -w api",
     "db:studio": "npm run prisma:studio -w api",
+    "lint": "npm run lint -w api && npm run lint -w frontend && npm run lint -w shared",
+    "format": "npm run format -w api && npm run format -w frontend && npm run format -w shared",
     "postinstall": "npm run build:shared",
     "prepare": "husky install || true"
   },

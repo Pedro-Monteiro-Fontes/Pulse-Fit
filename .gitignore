@@ -41,6 +41,18 @@ coverage/
 # Prisma
 prisma/migrations/.migration_lock.toml
 
+# Turbo
+.turbo/
+
+# Vercel
+.vercel/
+
 # Misc
 *.tgz
-.cache/projeto.txt
+.cache/
+!/.cache/projeto.txt
+
+# OS / Editor temp files
+*.orig
+*.rej
+*~
