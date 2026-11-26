@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Instrutor {
+  id        Int       @id @default(autoincrement())
+  nome      String
+  email     String    @unique
+  telefone  String?
+  cref      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  modalidades Modalidade[]
+}
+
+model Modalidade {
+  id          Int       @id @default(autoincrement())
+  nome        String    @unique
+  descricao   String?
+  instrutorId Int
+  instrutor   Instrutor @relation(fields: [instrutorId], references: [id])
+  matriculas  Matricula[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Aluno {
+  id             Int       @id @default(autoincrement())
+  nome           String
+  cpf            String    @unique
+  email          String    @unique
+  telefone       String?
+  dataNascimento DateTime
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  matriculas     Matricula[]
+}
+
+model Matricula {
+  id           Int       @id @default(autoincrement())
+  alunoId      Int
+  aluno        Aluno     @relation(fields: [alunoId], references: [id])
+  modalidadeId Int
+  modalidade   Modalidade @relation(fields: [modalidadeId], references: [id])
+  dataInicio   DateTime  @default(now())
+  status       String    @default("ativa")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([alunoId, modalidadeId])
+}
+
+model Usuario {
+  id        Int       @id @default(autoincrement())
+  nome      String
+  email     String    @unique
+  senhaHash String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
