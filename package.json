@@ -1,0 +1,31 @@
+{
+  "name": "pulse-fit",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "api",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w api",
+    "dev:frontend": "npm run dev -w frontend",
+    "build:api": "npm run build -w api",
+    "build:frontend": "npm run build -w frontend",
+    "build": "npm run build:api && npm run build:frontend",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down",
+    "db:migrate": "npm run prisma:migrate -w api",
+    "db:seed": "npm run prisma:seed -w api",
+    "db:studio": "npm run prisma:studio -w api",
+    "postinstall": "npm run build:shared",
+    "prepare": "husky install || true"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm@10.8.2"
+}
