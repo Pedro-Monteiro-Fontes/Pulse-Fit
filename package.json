@@ -29,7 +29,7 @@
     "db:studio": "npm run prisma:studio -w api",
     "lint": "npm run lint -w api && npm run lint -w frontend && npm run lint -w shared",
     "format": "npm run format -w api && npm run format -w frontend && npm run format -w shared",
-    "postinstall": "npm run build:shared",
+    "postinstall": "npm run build -w shared",
     "prepare": "husky install || true"
   },
   "devDependencies": {
